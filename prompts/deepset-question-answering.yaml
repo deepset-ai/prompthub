@@ -9,3 +9,4 @@ meta:
   authors: 
     - vblagoje
 version: v0.1.1
+prompt_card: prompt-cards/question-anwering.md
