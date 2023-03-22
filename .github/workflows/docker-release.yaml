@@ -23,5 +23,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tag_with_ref: true
           tags: deepset/prompthub:latest
