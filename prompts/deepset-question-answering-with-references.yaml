@@ -4,19 +4,10 @@ prompt_text: >
   given documents. You must only use information from the given documents. Use an unbiased and journalistic tone. 
   Do not repeat text. Cite the documents using Document[id] notation. If multiple documents contain the answer, cite 
   those documents like \"as stated in Document[id], Document[id], etc.\" If the documents do not contain the answer 
-  to the question, say that \"answering is not possible given the available information\". 
-  {join(documents, delimiter=new_line, pattern=new_line+'Document[$id]:' $content', str_replace={new_line: ' ', '[': '(', ']': ')'})}  
+  to the question, say that \"answering is not possible given the available information\. 
+  {documents}  
   Question: {query}; 
   Answer:
-output_shapers:
-  - func: strings_to_answers
-    inputs:
-       strings: results
-    outputs:
-      - answers
-    params:
-      reference_pattern: Document\\[([^\\]]+)\\]
-      reference_mode: id
 tags:
   - question-answering
 version: 1.0

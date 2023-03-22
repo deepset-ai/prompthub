@@ -3,12 +3,6 @@ prompt_text: |
             Given the context please answer the question. Context: {join(documents)}; 
             Question: {query}; 
             Answer:
-output_shapers:
-  - func: strings_to_answers
-    inputs: 
-      strings: results
-    outputs:
-      - answers
 description: A simple prompt to answer a question given a set of documents
 tags:
   - question-answering
