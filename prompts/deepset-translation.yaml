@@ -1,0 +1,10 @@
+name: deepset/translation
+prompt_text: | 
+            Translate the following context to {target_language}. Context: {documents}; Translation:
+description: Prompt to translate text into a target language
+tags: 
+  - translation
+meta: 
+  authors: 
+    - vblagoje
+version: v0.1.0
