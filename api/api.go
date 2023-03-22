@@ -68,6 +68,7 @@ func Serve() {
 }
 
 func ListPrompts(w http.ResponseWriter, r *http.Request) {
+	prompts := index.GetPrompts()
 	if err := render.RenderList(w, r, NewPromptListResponse(prompts)); err != nil {
 		render.Render(w, r, ErrRender(err))
 		return
@@ -123,11 +124,4 @@ func GetPrompt(w http.ResponseWriter, r *http.Request) {
 		render.Render(w, r, ErrRender(err))
 		return
 	}
-}
-
-// Article fixture data
-var prompts = []*index.Prompt{
-	{Name: "foo"},
-	{Name: "bar"},
-	{Name: "baz"},
 }

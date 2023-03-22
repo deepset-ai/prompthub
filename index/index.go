@@ -21,6 +21,16 @@ func GetPrompt(name string) (*Prompt, error) {
 	return nil, errors.New("not found")
 }
 
+func GetPrompts() []*Prompt {
+	v := make([]*Prompt, 0, len(data))
+
+	for _, value := range data {
+		v = append(v, value)
+	}
+
+	return v
+}
+
 func Init(path string) error {
 
 	files, err := os.ReadDir(path)
@@ -38,7 +48,7 @@ func Init(path string) error {
 		}
 		err = yaml.Unmarshal(yamlFile, &p)
 		if err != nil {
-			log.Fatalf("Unmarshal: %v", err)
+			log.Fatalf("Unmarshal %s: %v", file.Name(), err)
 		}
 
 		data[p.Name] = &p
