@@ -1,0 +1,8 @@
+name: deepset/question-answering
+prompt_text: | 
+            Given the context please answer the question. Context: $documents; Question: $questions; Answer:
+description: A simple prompt to answer a question given a set of documents
+tags: [question-answering]
+meta: 
+  authors: [vblagoje]
+version: v0.1
