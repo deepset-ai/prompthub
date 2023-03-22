@@ -1,0 +1,2 @@
+port: 3060
+prompts_path: ./prompts
