@@ -8,5 +8,5 @@ tags:
 meta: 
   authors: 
     - vblagoje
+  prompt_card: prompt-cards/question-anwering.md
 version: v0.1.1
-prompt_card: prompt-cards/question-anwering.md
