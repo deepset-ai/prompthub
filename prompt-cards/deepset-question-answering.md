@@ -1,5 +1,3 @@
-# deepset Question Answering Prompt
-
 ## How to use in Haystack
 Here's an example of how this prompt is intended to be used with Haystack. This `PromptTemplate` is best used alongside a `Shaper` in an `output_shapers` variable.
 ```
