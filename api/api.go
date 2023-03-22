@@ -25,7 +25,7 @@ func Serve() {
 		r.With(paginate).Get("/", ListPrompts)
 		// r.Get("/search", SearchPrompts)
 
-		r.Route("/{promptID}", func(r chi.Router) {
+		r.Route("/{promptName}", func(r chi.Router) {
 			r.Use(PromptCtx)      // Load the *Article on the request context
 			r.Get("/", GetPrompt) // GET /prompt/my-prompt
 		})
@@ -74,13 +74,12 @@ func ListPrompts(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// PromptCtx middleware is used to load an Article object from
-// the URL parameters passed through as the request. In case
-// the Article could not be found, we stop here and return a 404.
 func PromptCtx(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var prompt *index.Prompt
 		var err error
+
+		fmt.Println(chi.URLParam(r, "promptName"))
 
 		if promptName := chi.URLParam(r, "promptName"); promptName != "" {
 			prompt, err = index.GetPrompt(promptName)

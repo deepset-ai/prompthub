@@ -2,8 +2,9 @@ package index
 
 import (
 	"errors"
-	"io/ioutil"
 	"log"
+	"os"
+	"path/filepath"
 
 	"gopkg.in/yaml.v3"
 )
@@ -26,7 +27,7 @@ func GetPrompt(name string) (*Prompt, error) {
 
 func readFiles(path string) (PromptIndex, error) {
 
-	files, err := ioutil.ReadDir(path)
+	files, err := os.ReadDir(path)
 	if err != nil {
 		return nil, err
 	}
@@ -34,17 +35,17 @@ func readFiles(path string) (PromptIndex, error) {
 	retval := PromptIndex{}
 
 	for _, file := range files {
-		var p *Prompt
-		yamlFile, err := ioutil.ReadFile(file.Name())
+		var p Prompt
+		yamlFile, err := os.ReadFile(filepath.Join(path, file.Name()))
 		if err != nil {
 			log.Printf("Readfile error:  %v", err)
 		}
-		err = yaml.Unmarshal(yamlFile, p)
+		err = yaml.Unmarshal(yamlFile, &p)
 		if err != nil {
 			log.Fatalf("Unmarshal: %v", err)
 		}
 
-		retval[p.Name] = p
+		retval[p.Name] = &p
 	}
 
 	return retval, nil
