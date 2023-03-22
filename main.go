@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/deepset-ai/prompthub/api"
+	"github.com/deepset-ai/prompthub/index"
 	"github.com/deepset-ai/prompthub/output"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -27,6 +28,11 @@ func main() {
 
 	// Bootstrap config, this has to be called first
 	initConfig(configPath)
+
+	// Initialize the index by reading all the prompts from file
+	if err := index.Init(viper.GetString("prompts_path")); err != nil {
+		os.Exit(1)
+	}
 
 	// Start the HTTP server, block until shutdown
 	api.Serve()

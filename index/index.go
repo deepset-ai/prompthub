@@ -11,11 +11,7 @@ import (
 
 type PromptIndex map[string]*Prompt
 
-var data map[string]*Prompt
-
-func init() {
-	data, _ = readFiles("./prompts") // FIXME: get path from config
-}
+var data PromptIndex
 
 func GetPrompt(name string) (*Prompt, error) {
 	val, ok := data[name]
@@ -25,14 +21,14 @@ func GetPrompt(name string) (*Prompt, error) {
 	return nil, errors.New("not found")
 }
 
-func readFiles(path string) (PromptIndex, error) {
+func Init(path string) error {
 
 	files, err := os.ReadDir(path)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	retval := PromptIndex{}
+	data = PromptIndex{}
 
 	for _, file := range files {
 		var p Prompt
@@ -45,8 +41,8 @@ func readFiles(path string) (PromptIndex, error) {
 			log.Fatalf("Unmarshal: %v", err)
 		}
 
-		retval[p.Name] = &p
+		data[p.Name] = &p
 	}
 
-	return retval, nil
+	return nil
 }

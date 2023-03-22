@@ -79,8 +79,6 @@ func PromptCtx(next http.Handler) http.Handler {
 		var prompt *index.Prompt
 		var err error
 
-		fmt.Println(chi.URLParam(r, "promptName"))
-
 		if promptName := chi.URLParam(r, "promptName"); promptName != "" {
 			prompt, err = index.GetPrompt(promptName)
 		} else {
