@@ -11,5 +11,5 @@ FROM alpine:3.17
 COPY --from=build /go/src/github.com/deepset-ai/prompthub/prompthub /usr/bin/prompthub
 COPY prompthub.yaml.example /prompthub.yaml
 COPY prompts ./prompts
-EXPOSE 3060
+EXPOSE 80
 CMD ["prompthub", "-c /prompthub.yaml"]
