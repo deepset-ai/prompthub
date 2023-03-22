@@ -1,2 +1,2 @@
-port: 3060
+port: 80
 prompts_path: ./prompts
