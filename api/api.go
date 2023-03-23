@@ -17,19 +17,14 @@ import (
 
 // Serve starts the HTTP server and blocks
 func Serve() {
-	r := chi.NewRouter()
+	r := chi.NewRouter() // root router
 	r.Use(render.SetContentType(render.ContentTypeJSON))
 
-	// RESTy routes for "articles" resource
-	r.Route("/prompts", func(r chi.Router) {
-		r.With(paginate).Get("/", ListPrompts)
-		// r.Get("/search", SearchPrompts)
+	promptsRouter := chi.NewRouter()
+	promptsRouter.Get("/", ListPrompts)
+	promptsRouter.Get("/*", GetPrompt)
 
-		r.Route("/{promptName}", func(r chi.Router) {
-			r.Use(PromptCtx)      // Load the *Article on the request context
-			r.Get("/", GetPrompt) // GET /prompt/my-prompt
-		})
-	})
+	r.Mount("/prompts", promptsRouter)
 
 	// Start the HTTP server
 	srv := &http.Server{
@@ -75,27 +70,6 @@ func ListPrompts(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func PromptCtx(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		var prompt *index.Prompt
-		var err error
-
-		if promptName := chi.URLParam(r, "promptName"); promptName != "" {
-			prompt, err = index.GetPrompt(promptName)
-		} else {
-			render.Render(w, r, ErrNotFound)
-			return
-		}
-		if err != nil {
-			render.Render(w, r, ErrNotFound)
-			return
-		}
-
-		ctx := context.WithValue(r.Context(), "prompt", prompt)
-		next.ServeHTTP(w, r.WithContext(ctx))
-	})
-}
-
 // paginate is a stub, but very possible to implement middleware logic
 // to handle the request params for handling a paginated request.
 func paginate(next http.Handler) http.Handler {
@@ -115,10 +89,12 @@ func NewPromptListResponse(prompts []*index.Prompt) []render.Renderer {
 }
 
 func GetPrompt(w http.ResponseWriter, r *http.Request) {
-	// Assume if we've reach this far, we can access the article
-	// context because this handler is a child of the ArticleCtx
-	// middleware. The worst case, the recoverer middleware will save us.
-	prompt := r.Context().Value("prompt").(*index.Prompt)
+	promptName := chi.URLParam(r, "*")
+	prompt, err := index.GetPrompt(promptName)
+	if err != nil {
+		render.Render(w, r, ErrNotFound)
+		return
+	}
 
 	if err := render.Render(w, r, NewPromptResponse(prompt)); err != nil {
 		render.Render(w, r, ErrRender(err))
