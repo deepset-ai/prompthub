@@ -6,6 +6,6 @@ type Prompt struct {
 	Tags        []string               `json:"tags"`
 	Meta        map[string]interface{} `json:"meta"`
 	Version     string                 `json:"version"`
-	Text        string                 `json:"prompt_text"`
+	Text        string                 `json:"prompt_text" yaml:"prompt_text"`
 	Description string                 `json:"description"`
 }
