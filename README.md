@@ -1,7 +1,7 @@
 # Prompt Hub
 
 Prompt Hub serves a collection of ready-made prompts for the most common NLP tasks. The service is deployed at the
-public URL https://api.prompthub.deepset.ai
+public URL https://api.prompthub.deepset.ai and there's a nice UI to browse the prompts at https://prompthub.deepset.ai.
 
 ## Prompt format
 
