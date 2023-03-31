@@ -41,7 +41,7 @@ func main() {
 
 func initConfig(configPath *string) {
 	// Defaults
-	viper.SetDefault("port", "3060")
+	viper.SetDefault("port", "80")
 	viper.SetDefault("prompts_path", "./prompts")
 
 	// Automatically bind all the config options to env vars
