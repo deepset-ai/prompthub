@@ -11,6 +11,7 @@ import (
 	"github.com/deepset-ai/prompthub/index"
 	"github.com/deepset-ai/prompthub/output"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/cors"
 	"github.com/go-chi/render"
 	"github.com/spf13/viper"
 )
@@ -19,6 +20,9 @@ import (
 func Serve() {
 	r := chi.NewRouter() // root router
 	r.Use(render.SetContentType(render.ContentTypeJSON))
+	r.Use(cors.Handler(cors.Options{
+		AllowedOrigins: []string{"https://api.prompthub.deepset.ai"},
+	}))
 
 	promptsRouter := chi.NewRouter()
 	promptsRouter.Get("/", ListPrompts)
