@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -41,6 +42,12 @@ func Init(path string) error {
 	data = PromptIndex{}
 
 	for _, file := range files {
+		// yaml files only
+		ext := strings.ToLower(filepath.Ext(file.Name()))
+		if ext != ".yaml" && ext != ".yml" {
+			continue
+		}
+
 		var p Prompt
 		yamlFile, err := os.ReadFile(filepath.Join(path, file.Name()))
 		if err != nil {
