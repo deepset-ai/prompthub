@@ -21,7 +21,7 @@ func Serve() {
 	r := chi.NewRouter() // root router
 	r.Use(render.SetContentType(render.ContentTypeJSON))
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins: []string{"https://api.prompthub.deepset.ai"},
+		AllowedOrigins: []string{"https://prompthub.deepset.ai"},
 	}))
 
 	promptsRouter := chi.NewRouter()
