@@ -71,6 +71,10 @@ Content-Length: 211
 
 {"name":"prompt-name","tags":["translation"],"meta":{"authors":["vblagoje"]},"version":"v0.1.0","prompt_text":"Your prompt text goes here","description":"Prompt to translate text into a target language"}
 ```
+## API clients
+You can consume the Prompt Hub API natively from one of the supported languages:
+- Python: https://github.com/deepset-ai/prompthub-py
+- Typescript: https://github.com/deepset-ai/prompthub-ts
 
 ## Run the Prompt Hub API by yourself
 
