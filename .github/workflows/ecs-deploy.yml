@@ -2,6 +2,10 @@ name: Deploy to Amazon ECS
 
 on:
   workflow_call:
+    inputs:
+      docker-image:
+        required: true
+        type: string
 
 jobs:
   deploy:
@@ -26,10 +30,18 @@ jobs:
           ${{ secrets.ECS_TASK_DEFINITION }}
           EOF
 
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+        with:
+          task-definition: task-definition.json
+          container-name: ${{ secrets.ECS_CONTAINER_NAME }}
+          image: ${{ input.docker-image }}
+
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
         with:
-          task-definition: task-definition.json
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: ${{ secrets.ECS_SERVICE }}
           cluster: ${{ secrets.ECS_CLUSTER }}
           wait-for-service-stability: true
