@@ -8,4 +8,4 @@ description: Detech the language of the given context
 meta: 
   authors: 
     - deepset
-version: v0.0.1
+version: '0.0.1'
