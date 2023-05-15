@@ -1,0 +1,11 @@
+name: deepset/language-detection
+prompt_text: | 
+            Detect the language in the following context and answer with the 
+            name of the language. 
+            Context: {documents}; 
+            Answer:
+description: Detech the language of the given context
+meta: 
+  authors: 
+    - deepset
+version: v0.0.1

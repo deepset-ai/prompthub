@@ -1,0 +1,13 @@
+name: deepset/conditioned-question-generation
+prompt_text: | 
+            Please come up with a question for the given context and the answer.
+            Context: {documents}; 
+            Answer: {answers}; 
+            Question:
+description: Generate a question given context and answer
+tags:
+  - question-generation
+meta: 
+  authors: 
+    - deepset
+version: v0.0.1

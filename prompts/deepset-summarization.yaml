@@ -1,0 +1,10 @@
+name: deepset/summarization
+prompt_text: | 
+            Summarize this document: {documents} Summary:
+description: Summarize the given document
+tags:
+  - summarization
+meta: 
+  authors: 
+    - deepset
+version: v0.0.1

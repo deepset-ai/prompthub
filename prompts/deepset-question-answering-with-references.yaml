@@ -1,5 +1,5 @@
 name: deepset/question-answering-with-references
-prompt_text: >
+prompt_text: | 
   Create a concise and informative answer (no more than 50 words) for a given question based solely on the
   given documents. You must only use information from the given documents. Use an unbiased and journalistic tone.
   Do not repeat text. Cite the documents using Document[id] notation. If multiple documents contain the answer, cite

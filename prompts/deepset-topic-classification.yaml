@@ -1,0 +1,12 @@
+name: deepset/topic-clasisfication
+prompt_text: | 
+            Categories: {options}; 
+            What category best describes: {documents}; 
+            Answer:
+description: Classify the given documents into categories
+tags:
+  - classification
+meta: 
+  authors: 
+    - deepset
+version: v0.0.1
