@@ -1,6 +1,7 @@
 name: deepset/summarization
 prompt_text: | 
-            Summarize this document: {documents} Summary:
+            Summarize this document: {documents} 
+            Summary:
 description: Summarize the given document
 tags:
   - summarization
