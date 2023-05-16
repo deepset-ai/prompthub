@@ -8,5 +8,5 @@ tags:
   - question-answering
 meta: 
   authors: 
-    - vblagoje
-version: v0.1.1
+    - deepset
+version: '0.1.1'

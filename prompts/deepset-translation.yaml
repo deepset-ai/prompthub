@@ -6,5 +6,5 @@ tags:
   - translation
 meta: 
   authors: 
-    - vblagoje
-version: v0.1.0
+    - deepset
+version: '0.1.0'

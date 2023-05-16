@@ -1,0 +1,13 @@
+name: deepset/multiple-choice-question-answering
+prompt_text: | 
+            Question:{query} ; 
+            Choose the most suitable option to answer the above question.
+            Options: {options}; 
+            Answer:
+description: Given a set of answer options, choose the most suitable for the query
+tags:
+  - question-answering
+meta: 
+  authors: 
+    - deepset
+version: '0.0.1'
