@@ -2,3 +2,4 @@ prompthub
 prompthub.yaml
 
 .vscode
+__pycache__
