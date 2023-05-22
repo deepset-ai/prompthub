@@ -1,0 +1,77 @@
+name: Deploy to Amazon ECS
+
+on:
+  workflow_call:
+    inputs:
+      docker-image:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Store task definition
+        run: |
+          cat >> task-definition.json<< EOF
+          ${{ secrets.ECS_TASK_DEFINITION }}
+          EOF
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+        with:
+          task-definition: task-definition.json
+          container-name: ${{ secrets.ECS_CONTAINER_NAME }}
+          image: ${{ input.docker-image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ secrets.ECS_SERVICE }}
+          cluster: ${{ secrets.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+      - name: Calculate alert data
+        id: calculator
+        shell: bash
+        if: success() || failure()
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "alert_type=success" >> "$GITHUB_OUTPUT";
+          else
+            echo "alert_type=error" >> "$GITHUB_OUTPUT";
+          fi
+
+      - name: Send event to Datadog
+        if: success() || failure()
+        uses: masci/datadog@v1
+        with:
+          api-key: ${{ secrets.CORE_DATADOG_API_KEY }}
+          api-url: https://api.datadoghq.eu
+          events: |
+            - title: "PromptHub deployment"
+              text: "Job ${{ github.job }} for image ${{ input.docker-image }}"
+              alert_type: "${{ steps.calculator.outputs.alert_type }}"
+              source_type_name: "Github"
+              host: ${{ github.repository_owner }}
+              tags:
+                - "project:${{ github.repository }}"
+                - "job:${{ github.job }}"
+                - "run_id:${{ github.run_id }}"
+                - "workflow:${{ github.workflow }}"
+                - "image:${{ input.docker-image }}"
+                - "url:https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
