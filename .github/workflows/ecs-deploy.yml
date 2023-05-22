@@ -35,7 +35,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: ${{ secrets.ECS_CONTAINER_NAME }}
-          image: ${{ input.docker-image }}
+          image: ${{ inputs.docker-image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
@@ -64,7 +64,7 @@ jobs:
           api-url: https://api.datadoghq.eu
           events: |
             - title: "PromptHub deployment"
-              text: "Job ${{ github.job }} for image ${{ input.docker-image }}"
+              text: "Job ${{ github.job }} for image ${{ inputs.docker-image }}"
               alert_type: "${{ steps.calculator.outputs.alert_type }}"
               source_type_name: "Github"
               host: ${{ github.repository_owner }}
@@ -73,5 +73,5 @@ jobs:
                 - "job:${{ github.job }}"
                 - "run_id:${{ github.run_id }}"
                 - "workflow:${{ github.workflow }}"
-                - "image:${{ input.docker-image }}"
+                - "image:${{ inputs.docker-image }}"
                 - "url:https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
