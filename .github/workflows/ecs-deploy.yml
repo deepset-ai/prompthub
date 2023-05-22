@@ -48,7 +48,7 @@ jobs:
       - name: Calculate alert data
         id: calculator
         shell: bash
-        if: (success() || failure()) && github.ref_name == 'main'
+        if: success() || failure()
         run: |
           if [ "${{ job.status }}" = "success" ]; then
             echo "alert_type=success" >> "$GITHUB_OUTPUT";
@@ -57,14 +57,14 @@ jobs:
           fi
 
       - name: Send event to Datadog
-        if: (success() || failure()) && github.ref_name == 'main'
+        if: success() || failure()
         uses: masci/datadog@v1
         with:
           api-key: ${{ secrets.CORE_DATADOG_API_KEY }}
           api-url: https://api.datadoghq.eu
           events: |
             - title: "PromptHub deployment"
-              text: "Job ${{ github.job }} in branch ${{ github.ref_name }}"
+              text: "Job ${{ github.job }} for image ${{ input.docker-image }}"
               alert_type: "${{ steps.calculator.outputs.alert_type }}"
               source_type_name: "Github"
               host: ${{ github.repository_owner }}
@@ -73,5 +73,5 @@ jobs:
                 - "job:${{ github.job }}"
                 - "run_id:${{ github.run_id }}"
                 - "workflow:${{ github.workflow }}"
-                - "branch:${{ github.ref_name }}"
+                - "image:${{ input.docker-image }}"
                 - "url:https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
