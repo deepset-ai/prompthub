@@ -1,9 +1,17 @@
+This prompt is simply designed to answer a `query` given a set of `documents`. There will be 1 answer generated.
+
 ## How to use in Haystack
-Here's an example of how this prompt is intended to be used with Haystack. This `PromptTemplate` is best used alongside a `Shaper` in an `output_shapers` variable.
+To use this prompt with Haystack, we recommend defining an `output_parser` with `AnswerParser()` in the `PromptTemplate`. This way, the result of the `PromptNode` will return Haystack `Answer` objects
 
 ```python
-from haystack.nodes import PromptTemplate
+import os
 
-question_answering_template = PromptTemaplte(name="deepset/question-answering", output_shapers=[Shaper(func="strings_to_answers", outputs=["answers"], inputs={"strings": "results"})])
+from haystack.nodes import AnswerParser, PromptNode, PromptTemplate
+
+question_answering_template = PromptTemplate("deepset/question-answering", output_shapers=AnswerParser())
+
+prompt_node = PromptNode(model_name_or_path="text-davinci-003", api_key=os.environ.get("OPENAI_API_KEY"))
+
+prompt_node.prompt(prompt_template=question_answering_template, query="YOUR_QUERY", documents="YOUR_DOCUMENTS")
 
 ```
