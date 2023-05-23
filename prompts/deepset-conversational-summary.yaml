@@ -1,0 +1,13 @@
+name: deepset/conversational-summary
+prompt_text: |
+        Condense the following chat transcript by shortening and summarizing the content 
+        without losing important information:\n{chat_transcript}\nCondensed Transcript:
+description: Conversational summary to condense the chat history
+tags:
+  - agent
+  - conversational
+  - summarization
+meta:
+  authors:
+    - deepset
+version: '0.1.0'

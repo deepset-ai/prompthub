@@ -1,0 +1,11 @@
+name: deepset/conversational-agent
+prompt_text: |
+        The following is a conversation between a human and an AI.\n{history}\nHuman: {query}\nAI:
+description: Conversational agent which holds the history of the conversation.
+tags:
+  - agent
+  - conversational
+meta:
+  authors:
+    - deepset
+version: '0.1.0'
