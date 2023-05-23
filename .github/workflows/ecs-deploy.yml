@@ -12,6 +12,12 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    # If we remove these aws-actions/configure-aws-credentials won't assume the
+    # specified role.
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout
