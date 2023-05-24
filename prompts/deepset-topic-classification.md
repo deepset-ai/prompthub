@@ -7,7 +7,7 @@ import os
 
 from haystack.nodes import PromptNode, PromptTemplate
 
-topic_classifier_template = PromptTemplate("deepset/topoc-classification")
+topic_classifier_template = PromptTemplate("deepset/topic-classification")
 
 prompt_node = PromptNode(model_name_or_path="text-davinci-003", api_key=os.environ.get("OPENAI_API_KEY"))
 

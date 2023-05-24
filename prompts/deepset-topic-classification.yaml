@@ -1,4 +1,4 @@
-name: deepset/topic-clasisfication
+name: deepset/topic-classification
 prompt_text: | 
             Categories: {options}; 
             What category best describes: {documents}; 
