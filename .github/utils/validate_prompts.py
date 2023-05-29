@@ -13,8 +13,7 @@ def is_valid(prompt_file: Path) -> bool:
         data = yaml.safe_load(prompt_file.read_text())
     except:
         # Parsing failure means either the file is not yaml or it's malformed
-        print(f"File not valid: {prompt_file}")
-        print("  - Failed parsing")
+        print(f"Failed parsing file: {prompt_file}")
         return False
 
     required_fields = {
@@ -35,17 +34,12 @@ def is_valid(prompt_file: Path) -> bool:
         value = data[key]
         # Check the type of each field is the one we expect
         if type(value) is not expected_type:
-            if expected_type is str:
-                reports.append(f"Field {key} must be a string")
-            elif expected_type is dict:
-                reports.append(f"Field {key} must be a dictionary")
-            elif expected_type is list:
-                reports.append(f"Field {key} must be a list of strings")
+            reports.append(f"Field {key} must be of type {expected_type}")
             continue
 
         # For list fields we have an extra check as we want to verify that they contain strings
         if expected_type is list and len(value) > 0 and type(value[0]) is not str:
-            reports.append(f"Field {key} must be a string")
+            reports.append(f"Field {key} must be a list of strings")
 
     # Print a report if any field doesn't respect requirements
     if reports:
