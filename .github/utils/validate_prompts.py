@@ -12,7 +12,7 @@ def is_valid(prompt_file: Path) -> bool:
         data = yaml.safe_load(prompt_file.read_text())
     except:
         # Parsing failure means either the file is not yaml or it's malformed
-        print(f"Failed parsing file: {prompt_file}")
+        print(f"Failed parsing file: {prompt_file}", file=sys.stderr)
         return False
 
     required_fields = {
@@ -42,9 +42,9 @@ def is_valid(prompt_file: Path) -> bool:
 
     # Print a report if any field doesn't respect requirements
     if reports:
-        print(f"File not valid: {prompt_file}")
+        print(f"File not valid: {prompt_file}", file=sys.stderr)
         for report in reports:
-            print(f"  - {report}")
+            print(f"  - {report}", file=sys.stderr)
 
     # We got reports, the file must not be valid
     return len(reports) == 0
