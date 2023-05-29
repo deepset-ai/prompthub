@@ -12,10 +12,10 @@ import (
 
 type PromptIndex map[string]*Prompt
 
-var data PromptIndex
+var prompts PromptIndex
 
 func GetPrompt(name string) (*Prompt, error) {
-	val, ok := data[name]
+	val, ok := prompts[name]
 	if ok {
 		return val, nil
 	}
@@ -23,9 +23,9 @@ func GetPrompt(name string) (*Prompt, error) {
 }
 
 func GetPrompts() []*Prompt {
-	v := make([]*Prompt, 0, len(data))
+	v := make([]*Prompt, 0, len(prompts))
 
-	for _, value := range data {
+	for _, value := range prompts {
 		v = append(v, value)
 	}
 
@@ -39,7 +39,7 @@ func Init(path string) error {
 		return err
 	}
 
-	data = PromptIndex{}
+	prompts = PromptIndex{}
 
 	for _, file := range files {
 		// yaml files only
@@ -58,7 +58,7 @@ func Init(path string) error {
 			log.Fatalf("Unmarshal %s: %v", file.Name(), err)
 		}
 
-		data[p.Name] = &p
+		prompts[p.Name] = &p
 	}
 
 	return nil
