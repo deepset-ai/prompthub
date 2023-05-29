@@ -1,9 +1,9 @@
 name: deepset/sentiment-analysis
-prompt_text: | 
-            Please give a sentiment for this context. 
-            Answer with positive, negative or neutral. 
-            Context: {documents}; 
-            Answer:
+text: | 
+  Please give a sentiment for this context. 
+  Answer with positive, negative or neutral. 
+  Context: {documents}; 
+  Answer:
 description: Provide the sentiment (positive, negative or neutral) of a set of documents
 tags:
   - sentiment-analysis

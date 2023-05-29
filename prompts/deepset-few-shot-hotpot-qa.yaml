@@ -1,5 +1,5 @@
 name: deepset/few-shot-hotpot-qa
-prompt_text: |
+text: |
   You are a helpful and knowledgeable agent. To achieve your goal of answering complex questions correctly, you have access to the following tools:
   Search: useful for when you need to Google questions. You should ask targeted questions, for example, Who is Anthony Dirrell's brother?
   To answer questions, you'll need to go through multiple steps involving step-by-step thinking and selecting appropriate tools and their inputs; tools will respond with observations. When you are ready for a final answer, respond with the `Final Answer:`
