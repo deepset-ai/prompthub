@@ -9,7 +9,7 @@ A prompt is defined in a yaml file with the following format:
 
 ```yaml
 name: an-example
-prompt_text: Your prompt text goes here
+text: Your prompt text goes here
 description: A brief description of what your prompt is for
 tags:
   - translation

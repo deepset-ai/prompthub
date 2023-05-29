@@ -1,8 +1,8 @@
 name: deepset/topic-classification
-prompt_text: | 
-            Categories: {options}; 
-            What category best describes: {documents}; 
-            Answer:
+text: | 
+  Categories: {options}; 
+  What category best describes: {documents}; 
+  Answer:
 description: Classify the given documents into categories
 tags:
   - classification
