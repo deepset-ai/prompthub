@@ -17,7 +17,7 @@ def is_valid(prompt_file: Path) -> bool:
 
     required_fields = {
         "name": str,
-        "prompt_text": str,
+        "text": str,
         "description": str,
         "tags": list,
         "meta": dict,
