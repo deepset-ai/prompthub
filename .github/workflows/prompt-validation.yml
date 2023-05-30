@@ -1,0 +1,39 @@
+name: Verify prompt is valid
+
+on:
+  pull_request:
+    paths:
+      - prompts/*.yml
+      - prompts/*.yaml
+      - prompts/*.md
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get changed files
+        id: files
+        uses: tj-actions/changed-files@v34
+        with:
+          json_raw_format: true
+          files: |
+            prompts/*.{yaml,yml}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r .github/utils/requirements.txt
+
+      - name: Validate prompts
+        if: steps.files.outputs.any_changed == 'true'
+        run: |
+          python validate_prompts.py "${{ steps.files.outputs.all_changed_files }}"
