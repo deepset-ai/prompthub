@@ -30,6 +30,11 @@ func Serve() {
 
 	r.Mount("/prompts", promptsRouter)
 
+	promptCardRouter := chi.NewRouter()
+	promptCardRouter.Get("/*", GetCard)
+
+	r.Mount("/cards", promptCardRouter)
+
 	// Start the HTTP server
 	srv := &http.Server{
 		Addr: fmt.Sprintf("0.0.0.0:%s", viper.GetString("port")),
@@ -94,4 +99,14 @@ func GetPrompt(w http.ResponseWriter, r *http.Request) {
 		render.Render(w, r, ErrRender(err))
 		return
 	}
+}
+
+func GetCard(w http.ResponseWriter, r *http.Request) {
+	cardName := chi.URLParam(r, "*")
+	card, err := index.GetCard(cardName)
+	if err != nil {
+		render.Render(w, r, ErrNotFound)
+		return
+	}
+	render.PlainText(w, r, card)
 }

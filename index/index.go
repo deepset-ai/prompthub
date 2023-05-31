@@ -2,6 +2,7 @@ package index
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -13,6 +14,7 @@ import (
 type PromptIndex map[string]*Prompt
 
 var prompts PromptIndex
+var cards map[string]string
 
 func GetPrompt(name string) (*Prompt, error) {
 	val, ok := prompts[name]
@@ -32,6 +34,14 @@ func GetPrompts() []*Prompt {
 	return v
 }
 
+func GetCard(name string) (string, error) {
+	val, ok := cards[name]
+	if ok {
+		return val, nil
+	}
+	return "", errors.New("not found")
+}
+
 func Init(path string) error {
 
 	files, err := os.ReadDir(path)
@@ -40,6 +50,7 @@ func Init(path string) error {
 	}
 
 	prompts = PromptIndex{}
+	cards = map[string]string{}
 
 	for _, file := range files {
 		// yaml files only
@@ -59,6 +70,19 @@ func Init(path string) error {
 		}
 
 		prompts[p.Name] = &p
+
+		// Card file
+		cardName := strings.TrimSuffix(file.Name(), filepath.Ext(file.Name()))
+		cardFile := filepath.Join(path, fmt.Sprintf("%s.md", cardName))
+		if _, err := os.Stat(cardFile); errors.Is(err, os.ErrNotExist) {
+			log.Printf("Card not found for prompt %s", p.Name)
+			continue
+		}
+		cardData, err := os.ReadFile(cardFile)
+		if err != nil {
+			log.Printf("Readfile error:  %v", err)
+		}
+		cards[p.Name] = string(cardData)
 	}
 
 	return nil
