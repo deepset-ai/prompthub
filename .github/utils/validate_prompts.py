@@ -47,7 +47,7 @@ def is_valid(prompt_file: Path) -> bool:
             print(f"  - {report}", file=sys.stderr)
 
     # We got reports, the file must not be valid
-    return len(reports) == 0
+    return len(reports) > 0
 
 
 if __name__ == "__main__":
