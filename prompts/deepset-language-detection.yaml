@@ -5,6 +5,8 @@ text: |
   Context: {documents}; 
   Answer:
 description: Detech the language of the given context
+tags:
+  - language-detection
 meta: 
   authors: 
     - deepset
