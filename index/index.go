@@ -72,7 +72,8 @@ func Init(path string) error {
 		prompts[p.Name] = &p
 
 		// If the prompt has a related markdown with more detailed explanation
-		// add it to a separate index
+		// add it to a separate index. Note we use the prompt file name 
+		// as the name of the card, not the actual name of the prompt.
 		cardName := strings.TrimSuffix(file.Name(), filepath.Ext(file.Name()))
 		cardFile := filepath.Join(path, fmt.Sprintf("%s.md", cardName))
 		if _, err := os.Stat(cardFile); errors.Is(err, os.ErrNotExist) {
