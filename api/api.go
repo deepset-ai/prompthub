@@ -102,8 +102,8 @@ func GetPrompt(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetCard(w http.ResponseWriter, r *http.Request) {
-	cardName := chi.URLParam(r, "*")
-	card, err := index.GetCard(cardName)
+	promptName := chi.URLParam(r, "*")
+	card, err := index.GetCard(promptName)
 	if err != nil {
 		render.Render(w, r, ErrNotFound)
 		return
