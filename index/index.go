@@ -2,6 +2,7 @@ package index
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -12,10 +13,11 @@ import (
 
 type PromptIndex map[string]*Prompt
 
-var data PromptIndex
+var prompts PromptIndex
+var cards map[string]string
 
 func GetPrompt(name string) (*Prompt, error) {
-	val, ok := data[name]
+	val, ok := prompts[name]
 	if ok {
 		return val, nil
 	}
@@ -23,13 +25,21 @@ func GetPrompt(name string) (*Prompt, error) {
 }
 
 func GetPrompts() []*Prompt {
-	v := make([]*Prompt, 0, len(data))
+	v := make([]*Prompt, 0, len(prompts))
 
-	for _, value := range data {
+	for _, value := range prompts {
 		v = append(v, value)
 	}
 
 	return v
+}
+
+func GetCard(name string) (string, error) {
+	val, ok := cards[name]
+	if ok {
+		return val, nil
+	}
+	return "", errors.New("not found")
 }
 
 func Init(path string) error {
@@ -39,7 +49,8 @@ func Init(path string) error {
 		return err
 	}
 
-	data = PromptIndex{}
+	prompts = PromptIndex{}
+	cards = map[string]string{}
 
 	for _, file := range files {
 		// yaml files only
@@ -58,7 +69,22 @@ func Init(path string) error {
 			log.Fatalf("Unmarshal %s: %v", file.Name(), err)
 		}
 
-		data[p.Name] = &p
+		prompts[p.Name] = &p
+
+		// If the prompt has a related markdown with more detailed explanation
+		// add it to a separate index. Note we use the prompt file name 
+		// as the name of the card, not the actual name of the prompt.
+		cardName := strings.TrimSuffix(file.Name(), filepath.Ext(file.Name()))
+		cardFile := filepath.Join(path, fmt.Sprintf("%s.md", cardName))
+		if _, err := os.Stat(cardFile); errors.Is(err, os.ErrNotExist) {
+			log.Printf("Card not found for prompt %s", p.Name)
+			continue
+		}
+		cardData, err := os.ReadFile(cardFile)
+		if err != nil {
+			log.Printf("Readfile error:  %v", err)
+		}
+		cards[p.Name] = string(cardData)
 	}
 
 	return nil
