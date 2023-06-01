@@ -12,5 +12,5 @@ tags:
 description: Provides a prompt for question answering with references to documents
 meta:
   authors:
-    - deepset
+    - deepset-ai
 version: '0.1.0'
