@@ -36,4 +36,4 @@ jobs:
       - name: Validate prompts
         if: steps.files.outputs.any_changed == 'true'
         run: |
-          python .github/utils/validate_prompts.py "${{ steps.files.outputs.all_changed_files }}"
+          python .github/utils/validate_prompts.py ${{ steps.files.outputs.all_changed_files }}
