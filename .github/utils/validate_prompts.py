@@ -46,8 +46,8 @@ def is_valid(prompt_file: Path) -> bool:
         for report in reports:
             print(f"  - {report}", file=sys.stderr)
 
-    # We got reports, the file must not be valid
-    return len(reports) > 0
+    # If there's any number of reports the file must not be valid
+    return len(reports) == 0
 
 
 if __name__ == "__main__":
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     files = [Path(f) for f in args.files]
 
     print()
-    any_not_valid = any([is_valid(f) for f in files])
+    any_not_valid = any([not is_valid(f) for f in files])
 
     if any_not_valid:
         sys.exit(1)
