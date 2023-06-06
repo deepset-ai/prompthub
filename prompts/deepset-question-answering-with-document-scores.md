@@ -7,7 +7,7 @@ For example, given a query, the `WebRetriever` will return documents from the we
 ```python
 import os
 
-from haystack.nodes import AnswerParser, PromptNode, PromptTemplate, WebRetriever
+from haystack.nodes import PromptNode, PromptTemplate, WebRetriever
 
 question_anwering_with_scores = PromptTemplate("deepset/question-answering-with-document-scores")
 
@@ -26,7 +26,7 @@ from haystack import Pipeline
 pipe = Pipeline()
 
 pipe.add_node(component=retriever, name="WebRetriever", inputs=['Query'])
-pipe.add_node(component=prompt_node, name="QAwithScpresPrompt", inputs=['WebRetriever'])
+pipe.add_node(component=prompt_node, name="QAwithScoresPrompt", inputs=['WebRetriever'])
 ```
 
 ```python
