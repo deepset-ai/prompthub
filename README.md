@@ -71,7 +71,31 @@ Content-Length: 211
 
 {"name":"prompt-name","tags":["translation"],"meta":{"authors":["vblagoje"]},"version":"v0.1.0","prompt_text":"Your prompt text goes here","description":"Prompt to translate text into a target language"}
 ```
+
+### Get a model card by model name
+
+Request:
+
+```sh
+curl -i http://api.prompthub.deepset.ai/cards/prompt-name
+```
+
+Response:
+
+```
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=utf-8
+Vary: Origin
+Date: Wed, 07 Jun 2023 10:46:53 GMT
+Content-Length: 762
+
+This prompt is simply designed to answer a `query` given a set of `documents`. There will be 1 answer generated.
+
+...
+```
+
 ## API clients
+
 You can consume the Prompt Hub API natively from one of the supported languages:
 - Python: https://github.com/deepset-ai/prompthub-py
 - Typescript: https://github.com/deepset-ai/prompthub-ts
