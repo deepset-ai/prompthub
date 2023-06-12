@@ -28,7 +28,7 @@ version: v0.1
 Request:
 
 ```sh
-curl -i -H 'Accept: application/json' http://api.prompthub.deepset.ai/prompts
+curl -i -H 'Accept: application/json' https://api.prompthub.deepset.ai/prompts
 ```
 
 Response:
@@ -58,7 +58,7 @@ Content-Length: 42
 Request:
 
 ```sh
-curl -i -H 'Accept: application/json' http://api.prompthub.deepset.ai/prompts/prompt-name
+curl -i -H 'Accept: application/json' https://api.prompthub.deepset.ai/prompts/prompt-name
 ```
 
 Response:
@@ -77,7 +77,7 @@ Content-Length: 211
 Request:
 
 ```sh
-curl -i http://api.prompthub.deepset.ai/cards/prompt-name
+curl -i https://api.prompthub.deepset.ai/cards/prompt-name
 ```
 
 Response:
