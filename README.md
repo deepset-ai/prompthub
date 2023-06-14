@@ -45,7 +45,7 @@ Content-Length: 42
         "tags":["question-answering"],
         "meta":{"authors":["Alice","Bob"]},
         "version":"1.0",
-        "prompt_text":"My prompt text",
+        "text":"My prompt text",
         "description":"Provides a prompt for question answering with references to documents"
     }
 ]
@@ -69,7 +69,7 @@ Content-Type: application/json; charset=utf-8
 Date: Fri, 24 Mar 2023 08:06:19 GMT
 Content-Length: 211
 
-{"name":"prompt-name","tags":["translation"],"meta":{"authors":["vblagoje"]},"version":"v0.1.0","prompt_text":"Your prompt text goes here","description":"Prompt to translate text into a target language"}
+{"name":"prompt-name","tags":["translation"],"meta":{"authors":["vblagoje"]},"version":"v0.1.0","text":"Your prompt text goes here","description":"Prompt to translate text into a target language"}
 ```
 
 ### Get a model card by model name
