@@ -1,6 +1,6 @@
-# Prompt Hub
+# PromptHub
 
-Prompt Hub serves a collection of ready-made prompts for the most common NLP tasks. The service is deployed at the
+PromptHub serves a collection of ready-made prompts for the most common NLP tasks. The service is deployed at the
 public URL https://api.prompthub.deepset.ai and there's a nice UI to browse the prompts at https://prompthub.deepset.ai.
 
 ## Prompt format
@@ -19,7 +19,7 @@ meta:
 version: v0.1
 ```
 
-## Prompt Hub API
+## PromptHub API
 
 ### Get all the prompts
 
@@ -96,13 +96,13 @@ This prompt is simply designed to answer a `query` given a set of `documents`. T
 
 ## API clients
 
-You can consume the Prompt Hub API natively from one of the supported languages:
+You can consume the PromptHub API natively from one of the supported languages:
 - Python: https://github.com/deepset-ai/prompthub-py
 - Typescript: https://github.com/deepset-ai/prompthub-ts
 
-## Run the Prompt Hub API by yourself
+## Run the PromptHub API by yourself
 
-The easiest way to run the Prompt Hub API on your premises is to use the official Docker image:
+The easiest way to run the PromptHub API on your premises is to use the official Docker image:
 
 ```sh
 $ docker run -p80:80 deepset/prompthub
@@ -118,7 +118,7 @@ INFO Prompthub running at 0.0.0.0:80
 
 ## Development
 
-You can build and run the Prompt Hub API service locally following these steps:
+You can build and run the PromptHub API service locally following these steps:
 
 - Ensure you have a recent version of [Go](https://go.dev) installed:
 
