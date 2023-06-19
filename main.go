@@ -43,6 +43,7 @@ func initConfig(configPath *string) {
 	// Defaults
 	viper.SetDefault("port", "80")
 	viper.SetDefault("prompts_path", "./prompts")
+	viper.SetDefault("allowed_origins", []string{"https://prompthub.deepset.ai"})
 
 	// Automatically bind all the config options to env vars
 	viper.SetEnvPrefix("prompthub")
@@ -57,7 +58,9 @@ func initConfig(configPath *string) {
 	}
 	err := viper.ReadInConfig()
 	if err != nil {
-		output.FATAL.Fatalf("Fatal error: %s", err)
+		output.INFO.Println("Configuration file not found, running with default parameters")
+	} else {
+		output.DEBUG.Println("Config file found at", viper.ConfigFileUsed())
 	}
-	output.DEBUG.Println("Config file found at", viper.ConfigFileUsed())
+
 }

@@ -1,2 +1,4 @@
 port: 80
 prompts_path: ./prompts
+allowed_origins:
+    - http://localhost:5173
