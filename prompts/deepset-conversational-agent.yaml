@@ -21,7 +21,7 @@ text: |
   Question: {query}
   Thought:
   {transcript}
-description: Agent which holds the history of the conversation. Follows ReAct style 'Thought, Tool and Observation' steps but in conversational agent setting.
+description: Agent that holds the history of the conversation. Follows ReAct style 'Thought, Tool and Observation' steps but in a conversational agent setting.
 tags:
   - agent
   - conversational

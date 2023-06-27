@@ -1,34 +1,29 @@
-This prompt is intended to be used with a Haystack `Agent`, specificallly, a [`ConversationalAgent`](https://docs.haystack.deepset.ai/docs/agent#conversational-agent).
+This prompt is intended to be used with a Haystack `Agent`, specifically, a [`ConversationalAgent`](https://docs.haystack.deepset.ai/docs/agent#conversational-agent).
 
 To learn how to use this prompt and the `ConversationalAgent`, check out our [Building a Conversational Chat App Tutorial](https://haystack.deepset.ai/tutorials/24_building_chat_app).
 
-By default, the `ConversationalAgent` in Haystack would use this prompt without having to provide it using `prompt_template`. However, below is an example of how you might manually create a `PromptTemplate` with this prompt, and how you might use it with the ConversationalAgent.
+By default, the `ConversationalAgent` would use this prompt when it's provided with tools. If you want to more flexibility, below is an example of how you might use this prompt with the `Agent`.
 
 ## How to use in Haystack
-
-1. Create a `PromptTemplate` that uses `deepset/conversational-agent`:
 
 ```python
 import os
 
-from haystack.nodes import PromptNode, PromptTemplate
-
-conversational_agent_from_hub = PromptTemplate("deepset/conversational-agent")
+from haystack.nodes import PromptNode
+from haystack.agents.utils import conversational_agent_parameter_resolver
+from haystack.agents.memory import ConversationMemory
+from haystack.agents import Agent, ToolsManager
 
 prompt_node = PromptNode(
-    "gpt-3.5-turbo",
-    api_key=os.environ.get("OPENAI_API_KEY"),
-    max_length=256,
-    stop_words=["Observation:"],
+    "gpt-3.5-turbo", api_key=os.environ.get("OPENAI_API_KEY"), max_length=256, stop_words=["Observation:"]
 )
-```
+memory = ConversationMemory()
 
-2. Create a `ConversationalAgent` with `prompt_template`:
-
-```python
-from haystack.agents.conversational import ConversationalAgent
-
-agent = ConversationalAgent(prompt_node=prompt_node,
-                            prompt_template=conversational_agent_from_hub,
-                            tools=[search_tool])
+conversational_agent = Agent(
+    prompt_node=prompt_node,
+    memory=memory,
+    prompt_template="deepset/conversational-agent",
+    prompt_parameters_resolver=conversational_agent_parameter_resolver,
+    tools_manager=ToolsManager(tools=[YOUR_TOOL]),
+)
 ```
