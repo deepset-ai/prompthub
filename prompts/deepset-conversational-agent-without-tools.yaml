@@ -1,7 +1,7 @@
 name: deepset/conversational-agent-without-tools
 text: |
   The following is a conversation between a human and an AI.\n{memory}\nHuman: {query}\nAI:
-description: Simple chat agent without tools which holds the history of the conversation.
+description: Simple chat agent without tools that holds the history of the conversation.
 tags:
   - agent
   - conversational
