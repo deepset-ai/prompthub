@@ -8,7 +8,7 @@ import os
 
 from haystack.nodes import AnswerParser, PromptNode, PromptTemplate
 
-question_answering_template = PromptTemplate("deepset/question-answering", output_shapers=AnswerParser())
+question_answering_template = PromptTemplate("deepset/question-answering", output_parser=AnswerParser())
 
 prompt_node = PromptNode(model_name_or_path="text-davinci-003", api_key=os.environ.get("OPENAI_API_KEY"))
 
