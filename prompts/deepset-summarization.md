@@ -1,4 +1,4 @@
-This promopt is designed to produce a summary for each document provided in `documents`
+This prompt is designed to produce a summary for each document provided in `documents`
 
 ## How to use in Haystack
 
