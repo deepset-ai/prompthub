@@ -1,4 +1,4 @@
-This promps is intended to be used in a `PromptNode` which receives documents with corresponding scores. For example, a pipeline with a `Retriever` which returnes scored documents is a good candidate to use in combination with this prompt.
+This prompt is intended to be used in a `PromptNode` which receives documents with corresponding scores. For example, a pipeline with a `Retriever` which returnes scored documents is a good candidate to use in combination with this prompt.
 
 ## How to use in Haystack
 
