@@ -1,0 +1,21 @@
+name: deepset/actionable-item-detection
+text: | 
+  As an adept and intelligent language model, your task is to analyze a given meeting transcript or sentence and identify any actionable items present in the transcript/sentence. An action item requests a specific action to be executed, usually specifying what needs to be done, who should do it, and an optional deadline.
+  For instance, "I will complete the management presentation by the end of today" defines the task(Completion of the management presentation), assignee(speaker), and deadline(end of today).
+
+  To perform your task, you need to:
+
+  - Identify assignees and assignors of tasks whenever possible.
+  - Recognize date and time references, if specified.
+  - Use the conversation's context to improve insight quality, for example, replacing "I" with the speaker's name when known.
+
+  Begin by categorizing the input as actionable or non-actionable. If actionable, identify the action items. Your prompt should look like:
+  Transcript: {transcript}
+  Identified Action Items:
+description:  A prompt to identify actionable items from a given meeting transcript or sentence.
+tags:
+  - action-item-detection
+meta: 
+  authors: 
+    - deepset-ai
+version: '0.0.1'
