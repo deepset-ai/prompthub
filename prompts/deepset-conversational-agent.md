@@ -12,7 +12,8 @@ import os
 from haystack.nodes import PromptNode
 from haystack.agents.utils import conversational_agent_parameter_resolver
 from haystack.agents.memory import ConversationMemory
-from haystack.agents import Agent, ToolsManager
+from haystack.agents import Agent
+from haystack.agents.base import ToolsManager
 
 prompt_node = PromptNode(
     "gpt-3.5-turbo", api_key=os.environ.get("OPENAI_API_KEY"), max_length=256, stop_words=["Observation:"]
