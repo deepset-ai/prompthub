@@ -24,7 +24,7 @@ text: |
 
   Question: {query}
   Thought: Let's think step-by-step, I first need to
-description: Prompt to be used for an Agent. Follows 'Thought, Tool and Observation' steps.
+description: An agent prompt. Follows 'Thought, Tool and Observation' steps.
 tags:
   - agent
 meta:

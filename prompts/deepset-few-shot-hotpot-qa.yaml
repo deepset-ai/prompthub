@@ -57,7 +57,7 @@ text: |
   Thought:
   {transcript}
 
-description: Few-shot HotpotQA ReaAct Agent prompt
+description: A few-shot HotpotQA ReaAct Agent prompt.
 tags:
   - agent
 meta:

@@ -3,7 +3,7 @@ text: |
   Categories: {options}; 
   What category best describes: {documents}; 
   Answer:
-description: Classify the given documents into categories
+description: Classify the given documents into categories.
 tags:
   - classification
 meta: 

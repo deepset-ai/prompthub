@@ -3,7 +3,7 @@ text: |
   Given the context please answer the question. Context: {documents}; 
   Question: {query}; 
   Answer:
-description: A prompt to answer a question, per each given document
+description: Answer a question per document.
 tags:
   - question-answering
 meta: 

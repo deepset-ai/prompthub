@@ -2,7 +2,7 @@ name: deepset/summarization
 text: | 
   Summarize this document: {documents} 
   Summary:
-description: Summarize the given document
+description: Summarize the given document.
 tags:
   - summarization
 meta: 

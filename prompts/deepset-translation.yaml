@@ -1,7 +1,7 @@
 name: deepset/translation
 text: | 
   Translate the following context to {target_language}. Context: {documents}; Translation:
-description: Prompt to translate text into a target language
+description: Translate the given text into the target language.
 tags: 
   - translation
 meta: 

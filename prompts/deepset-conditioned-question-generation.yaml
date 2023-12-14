@@ -4,7 +4,7 @@ text: |
   Context: {documents}; 
   Answer: {answers}; 
   Question:
-description: Generate a question given context and answer
+description: Generate a question given the context and the answer.
 tags:
   - question-generation
 meta: 

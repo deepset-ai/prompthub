@@ -4,7 +4,7 @@ text: |
   Answer with positive, negative or neutral. 
   Context: {documents}; 
   Answer:
-description: Provide the sentiment (positive, negative or neutral) of a set of documents
+description: Provide the sentiment (positive, negative, or neutral) of a set of documents.
 tags:
   - sentiment-analysis
 meta: 

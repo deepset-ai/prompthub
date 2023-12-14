@@ -9,7 +9,7 @@ text: |
   Question: {query}; Answer: 
 tags:
   - question-answering
-description: Provides a prompt for question answering with references to documents
+description: Perform question answering with references to documents.
 meta:
   authors:
     - deepset-ai

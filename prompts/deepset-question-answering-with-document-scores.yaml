@@ -11,7 +11,7 @@ text: |
   paragraphs for the same answer candidate to answer accurately.
 
   After having considered all possibilities, the final answer is:
-description: A prompt to answer a question given a set of documents and their corresponding scores from the retriever.
+description: Answer a question given a set of documents and their corresponding scores from the Retriever.
 tags:
   - question-answering
 meta: 

@@ -20,7 +20,7 @@ text: |
   Remember, use the exact same number of words for each summary.
   Answer in JSON. The JSON should be a list (length 5) of dictionaries whose keys are "Missing_Entities" and "Denser_Summary".
   Here is the article that you should summarize: {documents}
-description: Summarize the given document using the chain of density technique (from https://arxiv.org/pdf/2309.04269.pdf). The prompt yields 5 summaries of the article with increasing density. Typically users prefer summary 4 or 5.
+description: Summarize the given document using the chain of density technique (from https://arxiv.org/pdf/2309.04269.pdf). The prompt yields 5 summaries of the article with increasing density. Typically, users prefer summary 4 or 5.
 tags:
   - summarization
 meta: 

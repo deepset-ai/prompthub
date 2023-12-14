@@ -4,7 +4,7 @@ text: |
   Context: {documents}; 
   Question: {query}; 
   Please answer yes or no! Answer:
-description: Check whether the given context contains the answer to the question
+description: Check whether the given context contains the answer to the question.
 tags:
   - question-answering
 meta: 
