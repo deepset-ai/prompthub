@@ -1,0 +1,19 @@
+name: deepset/summarization
+text: | 
+  Implement a rolling summarization technique to generate {length} words summary from a lengthy document containing multiple text chunks. 
+  The rolling summarization process should involve dynamically updating and condensing the summary as new information is introduced. 
+  Ensure that each time the new information added to the context, the summary is refined to encapsulate the most pertinent details while preserving the key points and overall meaning of the original content.
+  ---Current Summary---
+  {summary}
+  ---New Text Chunk---
+  {document}
+  ---
+  New Summary:
+
+description: Summarize a large document using rolling summarization technique.
+tags:
+  - summarization
+meta: 
+  authors: 
+    - tewnut
+version: '0.0.1'
